@@ -1,0 +1,18 @@
+/* MATUS */
+.matus{
+	/*
+margin: auto;
+width: 50%;
+*/
+font-family: Quicksand;
+font-style: normal;
+font-weight: bold;
+font-size: 180px;
+line-height: 225px;
+/* identical to box height */
+text-align: center;
+letter-spacing: 0.7em;
+margin-right: -0.7em;
+
+color: #000000;
+}
