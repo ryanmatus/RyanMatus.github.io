@@ -15,5 +15,8 @@
   "bugs": {
     "url": "https://github.com/RyanMatus/Personal-Website/issues"
   },
-  "homepage": "https://github.com/RyanMatus/Personal-Website#readme"
+  "homepage": "https://github.com/RyanMatus/Personal-Website#readme",
+  "dependencies": {
+    "node-sass": "^4.12.0"
+  }
 }
