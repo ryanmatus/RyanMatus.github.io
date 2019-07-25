@@ -8,12 +8,18 @@
   /* identical to box height */
   text-align: center;
   color: #ffffff;
-  letter-spacing: 0em;
-  transition: all 0.2s ease-in;
+  letter-spacing: 0.7em;
+  -webkit-animation: letter-spacing 1s;
+  animation: letter-spacing 1s;
 }
 
-.matus:hover{
-  letter-spacing: 0.7em;
+@-webkit-keyframes letter-spacing {
+  0%   { letter-spacing: 0em; }
+  100% { letter-spacing:0.7em; }
+}
+@keyframes letter-spacing {
+  0%   { letter-spacing: 0em; }
+  100% { letter-spacing:0.7em; }
 }
 
 body {
