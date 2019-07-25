@@ -9,17 +9,18 @@
   text-align: center;
   color: #ffffff;
   letter-spacing: 0.7em;
-  -webkit-animation: letter-spacing 1s;
-  animation: letter-spacing 1s;
+  margin-right: -0.7em;
+  -webkit-animation: letter-spacing 1.3s;
+  animation: letter-spacing 1.3s;
 }
 
 @-webkit-keyframes letter-spacing {
-  0%   { letter-spacing: 0em; }
-  100% { letter-spacing:0.7em; }
+  0%   { letter-spacing: 0em; margin-right: 0em;}
+  100% { letter-spacing: 0.7em; margin-right: -0.7em;}
 }
 @keyframes letter-spacing {
-  0%   { letter-spacing: 0em; }
-  100% { letter-spacing:0.7em; }
+  0%   { letter-spacing: 0em; margin-right: 0em;}
+  100% { letter-spacing: 0.7em; margin-right: -0.7em;}
 }
 
 body {
