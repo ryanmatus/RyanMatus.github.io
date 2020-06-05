@@ -1,4 +1,4 @@
-@import url(https://fonts.googleapis.com/css?family=Ubuntu:400,300italic,500);
+@import url(https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,500;1,900&display=swap);
 *{
   margin: 0px;
   padding: 0px;
@@ -15,11 +15,11 @@ body {
   filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#dd5e89', endColorstr='#f7bb97',GradientType=0 ); /* IE6-9 */
 }
 h1 {
-  font-family: 'Ubuntu', sans-serif;
+  font-family: 'Raleway', sans-serif;
   color: rgba(255, 255, 255, 0.65);
   font-size: 120px;
   margin: 20px 0px;
-  font-weight: 100;
+  font-weight: 500;
 }
 @media screen and (max-width: 480px){
   h1{
@@ -41,7 +41,9 @@ h1 {
 }
 .title ul li {
   list-style: none;
-  font-family: 'Ubuntu', sans-serif;
+  font-family: 'Raleway', sans-serif;
+  font-weight: 900;
+  font-style: italic;
   display: inline-block;
   border: #fff solid 2px;
   border-radius: 50px;
@@ -59,7 +61,7 @@ li a{
 }
 li a:hover{
   background: #fff;
-  color: #1db8e8;
+  color: #000000;
   border-radius: 50px;
 }
 
