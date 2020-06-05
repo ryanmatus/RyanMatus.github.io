@@ -4,15 +4,15 @@
   padding: 0px;
 }
 body {
-  background: rgb(18, 181, 231);
+  background: rgb(221,94,137);
 }
 .container{
   overflow: hidden;
   text-align: center;
-  background: -moz-linear-gradient(top,  rgba(169,228,247,1) 0%, rgba(15,180,231,1) 100%); /* FF3.6-15 */
-  background: -webkit-linear-gradient(top,  rgba(169,228,247,1) 0%,rgba(15,180,231,1) 100%); /* Chrome10-25,Safari5.1-6 */
-  background: linear-gradient(to bottom,  rgba(169,228,247,1) 0%,rgba(15,180,231,1) 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
-  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#a9e4f7', endColorstr='#0fb4e7',GradientType=0 ); /* IE6-9 */
+  background: -moz-linear-gradient(top,  rgba(221,94,137,1) 0%, rgba(247,187,151,1) 100%); /* FF3.6-15 */
+  background: -webkit-linear-gradient(top,  rgba(221,94,137,1) 0%,rgba(247,187,151,1) 100%); /* Chrome10-25,Safari5.1-6 */
+  background: linear-gradient(to bottom,  rgba(221,94,137,1) 0%,rrgba(247,187,151,1) 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#dd5e89', endColorstr='#f7bb97',GradientType=0 ); /* IE6-9 */
 }
 h1 {
   font-family: 'Ubuntu', sans-serif;
