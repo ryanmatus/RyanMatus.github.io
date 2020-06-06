@@ -1,4 +1,4 @@
-!(function (t) {
+!(function (t) { //the following large block of code is from Webpack when I used it to pre-process parts of the website
   var e = {};
   function n(r) {
     if (e[r]) return e[r].exports;
@@ -51,10 +51,10 @@
     }),
     (n.p = ""),
     n((n.s = 0));
-})([
+})([ //main function for the mouseover actions
   function (t, e) {
     $([
-      "./assets/iso-apartments.png",
+      "./assets/iso-apartments.png", //the images used for the mouseovers
       "./assets/iso-hospital.png",
       "./assets/iso-powerplant.png",
       "./assets/iso-school.png",
@@ -64,34 +64,34 @@
     }),
       jQuery(document).ready(function () {
         $(".title-apartments").mouseout(function () {
-          $("#map").attr("src", "./assets/iso-original.png");
+          $("#map").attr("src", "./assets/iso-original.png"); //show original by default
         }),
           $(".title-apartments").mouseover(function () {
-            $("#map").attr("src", "./assets/iso-apartments.png");
+            $("#map").attr("src", "./assets/iso-apartments.png"); //show colored version on mouseover
           }),
           $(".title-hospital").mouseout(function () {
-            $("#map").attr("src", "./assets/iso-original.png");
+            $("#map").attr("src", "./assets/iso-original.png"); //show original by default
           }),
           $(".title-hospital").mouseover(function () {
-            $("#map").attr("src", "./assets/iso-hospital.png");
+            $("#map").attr("src", "./assets/iso-hospital.png"); //show colored version on mouseover
           }),
           $(".title-powerplant").mouseout(function () {
-            $("#map").attr("src", "./assets/iso-original.png");
+            $("#map").attr("src", "./assets/iso-original.png"); //show original by default
           }),
           $(".title-powerplant").mouseover(function () {
-            $("#map").attr("src", "./assets/iso-powerplant.png");
+            $("#map").attr("src", "./assets/iso-powerplant.png"); //show colored version on mouseover
           }),
           $(".title-school").mouseout(function () {
-            $("#map").attr("src", "./assets/iso-original.png");
+            $("#map").attr("src", "./assets/iso-original.png"); //show original by default
           }),
           $(".title-school").mouseover(function () {
-            $("#map").attr("src", "./assets/iso-school.png");
+            $("#map").attr("src", "./assets/iso-school.png"); //show colored version on mouseover
           }),
           $(".title-supermarket").mouseout(function () {
-            $("#map").attr("src", "./assets/iso-original.png");
+            $("#map").attr("src", "./assets/iso-original.png"); //show original by default
           }),
           $(".title-supermarket").mouseover(function () {
-            $("#map").attr("src", "./assets/iso-supermarket.png");
+            $("#map").attr("src", "./assets/iso-supermarket.png"); //show colored version on mouseover
           });
       });
   },
