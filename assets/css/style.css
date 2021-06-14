@@ -15,7 +15,7 @@
   animation: letter-spacing 1.3s;
 
   text-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
-  transition: all 0.3s cubic-bezier(.25,.8,.25,1);
+  transition: all 0.5s cubic-bezier(.25,.8,.25,1);
 }
 
 @-webkit-keyframes letter-spacing {
@@ -38,6 +38,43 @@
   position: fixed;
   align-items: center;
   justify-content: center;
+}
+
+header {
+  background: #272f41;
+  color: #272f41;
+  backdrop-filter: saturate(180%) blur(20px);
+  -webkit-backdrop-filter: saturate(180%) blur(20px);
+}
+
+header > * {
+  display: grid;
+  grid-auto-flow: column;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 1rem;
+}
+
+.headertext {
+  font-family: Quicksand;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 1vw;
+  margin-left: 5em;
+  margin-right: 5em;
+
+  color: #ffffff;
+
+  text-align: center;
+
+  text-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+  transition: text-shadow 0.5s cubic-bezier(.25,.8,.25,1);
+  transition: color 0.3s cubic-bezier(.25,.8,.25,1);
+}
+
+.headertext:hover{
+  text-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
+  color: #fb9fa4;
 }
 
 body {
