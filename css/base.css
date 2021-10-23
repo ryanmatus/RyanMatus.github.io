@@ -111,21 +111,21 @@ main {
 }
 
 /* Header */
-.codrops-header {
+.c-header {
 	position: relative;
 	z-index: 100;
 }
 
-.codrops-header__links a {
+.c-header__links a {
 	display: inline-block;
 	text-transform: lowercase;
 }
 
-.codrops-header__links a:nth-child(2) {
+.c-header__links a:nth-child(2) {
 	margin: 0 0.5rem;
 }
 
-.codrops-header__title {
+.c-header__title {
 	font-size: 1rem;
 	line-height: 1;
 	margin: 0 0 0.75rem 0;
@@ -401,15 +401,15 @@ main {
 		grid-template-rows: auto auto auto;
 		grid-template-areas: 'pageheader menutop'
 							'... ...'
-							'... codropsheader';
+							'... cheader';
 	}
-	.codrops-header {
-		grid-area: codropsheader;
+	.c-header {
+		grid-area: cheader;
 		padding: 0;
 		justify-self: end;
 		text-align: right;
 	}
-	.codrops-links {
+	.c-links {
 		margin: 0;
 	}
 	.frame a {
