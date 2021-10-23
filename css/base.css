@@ -179,8 +179,6 @@ main {
 .header__item-text {
 	font-family: "Anton", Arial, sans-serif;
 	text-transform: uppercase;
-	-webkit-text-stroke: 2px #fa80a4;
-	text-stroke: 2px #fa80a4;
 	-webkit-text-fill-color: #fa80a4;
 	text-fill-color: #fa80a4;
 	color: #fa80a4;
