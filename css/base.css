@@ -362,6 +362,7 @@ main {
 	margin: 0 auto;
 	font-size: 1.15rem;
 	padding: 1.5rem;
+	overflow: hidden;
 }
 
 .js .content__item {
@@ -466,5 +467,6 @@ main {
 	.content__item {
 		font-size: 1.5rem;
 		padding: 10vh 1rem;
+		overflow: hidden;
 	}
 }
