@@ -6,13 +6,13 @@ article,aside,details,figcaption,figure,footer,header,hgroup,main,nav,section,su
 }
 
 body {
-	--color-text: #fff;
-	--color-bg: #101010;
+	--color-text: rgb(255, 255, 255);
+	--color-bg: #131520;
 	--color-link: #fff;
-	--color-link-hover: #eeaa44;
+	--color-link-hover: #ecb602;
 	font-family: "Niramit", Arial, sans-serif;
 	min-height: 100vh;
-	color: #59575c;
+	color: #131520;
 	color: var(--color-text);
 	background-color: #fff;
 	background-color: var(--color-bg);
@@ -169,6 +169,26 @@ main {
 	pointer-events: auto;
 }
 
+.header__item {
+	position: relative;
+	display: block;
+	flex-wrap: wrap;
+	justify-content: center;
+}
+
+.header__item-text {
+	font-family: "Anton", Arial, sans-serif;
+	text-transform: uppercase;
+	-webkit-text-stroke: 2px #fa80a4;
+	text-stroke: 2px #fa80a4;
+	-webkit-text-fill-color: #fa80a4;
+	text-fill-color: #fa80a4;
+	color: #fa80a4;
+	font-size: 6rem;
+	display: block;
+	text-align: center
+}
+
 .menu--closed .menu__item {
 	pointer-events: none;
 }
@@ -188,8 +208,8 @@ main {
 .menu__item-text {
 	font-family: "Anton", Arial, sans-serif;
 	text-transform: uppercase;
-	-webkit-text-stroke: 2px #fff;
-	text-stroke: 2px #fff;
+	-webkit-text-stroke: 2px #fa80a4;
+	text-stroke: 2px #fa80a4;
 	-webkit-text-fill-color: transparent;
 	text-fill-color: transparent;
 	color: transparent;
@@ -200,9 +220,9 @@ main {
 }
 
 .menu__item--current .menu__item-text {
-	-webkit-text-fill-color: #fff;
-	text-fill-color: #fff;
-	color: #fff;
+	-webkit-text-fill-color: #fa80a4;
+	text-fill-color: #fa80a4;
+	color: #fa80a4;
 	-webkit-text-stroke: 2px transparent;
 	text-stroke: 2px transparent;
 }
