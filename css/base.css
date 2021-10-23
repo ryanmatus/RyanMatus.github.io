@@ -108,6 +108,7 @@ main {
 
 .content {
 	text-align: center;
+	overflow: hidden;
 }
 
 /* Header */
@@ -393,6 +394,7 @@ main {
 		margin: 0 auto;
 		min-height: 60vh;
 		text-align: left;
+		overflow: hidden;
 	}
 	.frame {
 		position: fixed;
