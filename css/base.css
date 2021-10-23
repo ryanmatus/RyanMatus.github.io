@@ -9,10 +9,10 @@ body {
 	--color-text: #fff;
 	--color-bg: #101010;
 	--color-link: #fff;
-	--color-link-hover: #0b44fb;
+	--color-link-hover: #eeaa44;
 	font-family: "Niramit", Arial, sans-serif;
 	min-height: 100vh;
-	color: #57585c;
+	color: #59575c;
 	color: var(--color-text);
 	background-color: #fff;
 	background-color: var(--color-bg);
