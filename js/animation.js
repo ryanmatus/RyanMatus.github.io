@@ -109,179 +109,6 @@
     calcWinsize();
     window.addEventListener('resize', calcWinsize);
 
-    let allowTilt = true;
-
-    class Grid {
-        constructor(el) {
-            this.DOM = {el: el};
-            // Some configuration values.
-            this.config = {
-                // The min and max values to move each item (y-axis) when we move the mouse.
-                titltOffset: {min: 5, max: 40}
-            };
-            // Grid items.
-            this.DOM.items = Array.from(this.DOM.el.querySelectorAll('.grid__item'));
-            // Total items.
-            this.itemsTotal = this.DOM.items.length;
-            // Spread the grid items.
-            this.spread();
-			//window.addEventListener('resize', () => this.spread());
-        }
-        spread() {
-            // Randomly spread the grid items.
-            this.DOM.items.forEach((item) => {
-                // The min and max values to move each item (y-axis) when we move the mouse.
-                const randnum = getRandom(this.config.titltOffset.min,this.config.titltOffset.max);
-                item.dataset.minTy = -1*randnum;
-                item.dataset.maxTy = randnum;
-
-                const rect = item.getBoundingClientRect();
-                // Item´s center point.
-                const center = {x: rect.left+rect.width/2, y: rect.top+rect.height/2};
-                // Calculate the item´s quadrant in the viewport.
-                const quadrant = center.x >= winsize.width/2 ?
-                                    center.y <= winsize.height/2 ? 1 : 4 :
-                                    center.y <= winsize.height/2 ? 2 : 3;
-                
-                // Now calculate how much to translate the item.
-                // The positions will be random but only in the area of the item´s quadrant.
-                // Also, consider a margin so the item does not stay completely out of the viewport or its quadrant.
-                const margins = {x: winsize.width*.05, y: winsize.height*.05}
-                const tx = quadrant === 1 || quadrant === 4 ? 
-                        getRandom(-1*center.x + winsize.width/2 + margins.x, winsize.width - center.x - margins.x) :
-                        getRandom(-1*center.x + margins.x, winsize.width/2 - center.x - margins.x);
-                const ty = quadrant === 1 || quadrant === 2 ?
-                        getRandom(-1*center.y + margins.y, winsize.height/2 - center.y - margins.y) :
-                        getRandom(-1*center.y + winsize.height/2 + margins.y, winsize.height - center.y - margins.y);
-
-                // Save the current translation.
-                item.dataset.ctx = tx;
-                item.dataset.cty = ty;
-
-                TweenMax.set(item, {
-                    x: tx,
-                    y: ty,
-                    scale: 0.5
-                });
-            });
-        }
-        tilt(ev) {
-            if ( !allowTilt ) return;
-            const mousepos = getMousePos(ev);
-            // Document scrolls.
-            const docScrolls = {
-                left : document.body.scrollLeft + document.documentElement.scrollLeft, 
-                top : document.body.scrollTop + document.documentElement.scrollTop
-            };
-            // Mouse position relative to the main element.
-            const relmousepos = { 
-                x : mousepos.x - docScrolls.left, 
-                y : mousepos.y - docScrolls.top 
-            };
-            // Movement settings for the tilt elements.
-            this.DOM.items.forEach((item) => {
-                TweenMax.to(item, 4, {
-                    ease: Quint.easeOut,
-                    y: Number(item.dataset.cty) + lineEq(item.dataset.maxTy,item.dataset.minTy,winsize.height,0,relmousepos.y)
-                });
-            });
-        }
-        hideItems(direction) {
-            return this.toggleItems('hide', direction);
-        }
-        showItems(direction) {
-            return this.toggleItems('show', direction);
-        }
-        toggleItems(action, direction) {
-            return new Promise((resolve, reject) => {
-                let cnt = 0;
-                this.DOM.items.forEach((item) => {
-                    const rect = item.getBoundingClientRect();
-                    
-                    // The speed and delay will depend on how much the item can be translated when moving the mouse (this.config.titltOffset).
-                    // This will result in some items moving faster than others and also starting at different times.
-                    const speed = lineEq(1.3,0.9,this.config.titltOffset.min,this.config.titltOffset.max,item.dataset.maxTy);
-                    const delay = lineEq(0,0.4,this.config.titltOffset.min,this.config.titltOffset.max,item.dataset.maxTy);
-    
-                    TweenMax.to(item, speed, {
-                        ease: Expo.easeInOut,
-                        delay: delay,
-                        startAt: action === 'show' ? {y: direction === 'up' ? `+=${winsize.height + rect.height}` : `-=${winsize.height + rect.height}`, opacity:1} : null,
-                        y: action === 'show' ? item.dataset.cty : 
-                            direction === 'up' ? `-=${winsize.height + rect.height}` : `+=${winsize.height + rect.height}`
-                    });
-
-                    TweenMax.to(item, action === 'show' ? speed*.55 : speed*.45, {
-                        ease: action === 'show' ? Quad.easeIn : Expo.easeIn,
-                        delay: delay,
-                        scaleX: 0.45,
-                        scaleY: getRandom(1,1.3),
-                        opacity: 0.5,
-                        onComplete: () => {
-                            TweenMax.to(item, action === 'show' ? speed*.45 : speed*.55, {
-                                ease: action === 'show' ? Expo.easeOut : Quad.easeOut,
-                                scaleX: 0.5,
-                                scaleY: 0.5,
-                                opacity: 1,
-                                onComplete: () => {
-                                    if ( action === 'hide' ) {
-                                        TweenMax.set(item, {opacity: 0, y: item.dataset.cty});
-                                    }
-                                    cnt++;
-                                    if ( this.itemsTotal === cnt ) {
-                                        resolve();
-                                    }
-
-                                    /*
-                                    // If we want to shuffle the items again after the navigation:
-                                    if ( action === 'hide' ) {
-                                        TweenMax.set(item, {opacity: 0, y: 0});
-                                    }
-                                    cnt++;
-                                    if ( this.itemsTotal === cnt ) {
-                                        if ( action === 'hide' ) {
-                                            this.spread();
-                                        }
-                                        resolve();
-                                    }
-                                    */
-                                }
-                            });    
-                        }
-                    });
-                });
-            });
-        }
-        open() {
-            return new Promise((resolve, reject) => {
-                this.DOM.el.classList.add('grid--open');
-
-                TweenMax.to(this.DOM.items, 1, {
-                    ease: Expo.easeInOut,
-                    x: 0,
-                    y: 0,
-					scale: 1.01,
-                    onComplete: resolve
-                });
-            });
-        }
-        close() {
-            return new Promise((resolve, reject) => {
-                this.DOM.el.classList.remove('grid--open');
-
-                this.DOM.items.forEach((item) => {
-                    TweenMax.to(item, 1, {
-                        ease: Expo.easeInOut,
-                        x: item.dataset.ctx,
-                        y: item.dataset.cty,
-                        scale: 0.5,
-                        onComplete: resolve
-                    });
-                });
-            });
-        }
-    }
-
     class MenuItem {
         constructor(el) {
             this.DOM = {el: el};
@@ -294,12 +121,12 @@
             const isCurrent = this.DOM.el.classList.contains('menu__item--current');
             this.DOM.el.classList[isCurrent ? 'remove' : 'add']('menu__item--current');
             // Toggle the link element ("explore").
-            TweenMax.to(this.DOM.link, 1, {
+            /*TweenMax.to(this.DOM.link, 1, {
                 ease: Expo.easeOut,
                 startAt: isCurrent ? null : {opacity: 0, y: direction === 'up' ? 15 : -15},
                 y: isCurrent ? direction === 'up' ? -15 : 15 : 0,
                 opacity: isCurrent ? 0 : 1
-            });
+            });*/
         }
         show() {
             this.toggle('show');
@@ -316,7 +143,7 @@
             });
             
             // Fade in/out the number and link.
-            let extraElems = [this.DOM.number, this.DOM.link];
+            let extraElems = [this.DOM.number];
             if ( action === 'show' && !this.DOM.el.classList.contains('menu__item--current') ) {
                 extraElems = [this.DOM.number];
             }
@@ -331,9 +158,21 @@
 	class ContentItem {
         constructor(el) {
             this.DOM = {el: el};
+
+            this.DOM.items = Array.from(this.DOM.el.querySelectorAll('content__item'));
         }
         toggleCurrent() {
             this.DOM.el.classList[this.DOM.el.classList.contains('content__item--current') ? 'remove' : 'add']('content__item--current');
+        }
+        open() {
+            return new Promise((resolve, reject) => {
+                this.DOM.el.classList.add('content--open');
+
+                TweenMax.to(this.DOM.items, 1, {
+                    ease: Expo.easeInOut,
+                    opacity: 1
+                });
+            })
         }
     }
 
@@ -345,16 +184,13 @@
             Array.from(this.DOM.menu.querySelectorAll('.menu__item')).forEach((item) => this.menuItems.push(new MenuItem(item)));
             // The page element (the grids and contents parent)
             this.DOM.page = document.querySelector('.page');
-            // The grid´s wrap.
-            this.DOM.gridWrap = this.DOM.page.querySelector('.gridwrap');
             // The back ctrl. For closing the grid/content view and go back to the main page.
             this.DOM.backCtrl = this.DOM.page.querySelector('button.gridback');
+            this.DOM.pageContents = this.DOM.page.querySelector('.content');
 			// The content items instances.
             this.contentItems = [];
             Array.from(this.DOM.page.querySelectorAll('.content > .content__item')).forEach((item) => this.contentItems.push(new ContentItem(item)));
-            // The grid instances.
-            this.grids = [];
-            Array.from(this.DOM.gridWrap.querySelectorAll('.grid')).forEach((grid) => this.grids.push(new Grid(grid)));
+            
             this.init();
         }
         init() {
@@ -362,58 +198,43 @@
             this.current = 0;
             // Add current class to the first menu item.
             this.menuItems[this.current].toggleCurrent();
-            // Also show the current grid items.
-            this.grids[this.current].DOM.items.forEach((item) => TweenMax.set(item, {opacity: 1}));
             // Add current class to the first content item.
             this.contentItems[this.current].toggleCurrent();
 
             this.initEvents();
         }
         initEvents() {
-            // Move the current grid´s items on the y-axis as the user moves the mouse.
-            this.mousemoveFn = (ev) => requestAnimationFrame(() => this.grids[this.current].tilt(ev));
-            window.addEventListener('mousemove', this.mousemoveFn);
-
-            // Clicking the menu item text and link. (navigation and show the grid/content).
+            // Clicking the menu item text and link. (navigation and show the content).
             for (const [pos, item] of this.menuItems.entries()) {
-                // Clicking on the menu item text will trigger the navigation: the current grid items move away and the new ones come in.
-                item.DOM.textwrap.addEventListener('click', () => this.navigate(pos));
+                // Clicking on the menu item text will trigger the navigation
+                item.DOM.textwrap.addEventListener('click', () => this.showContent(pos));
                 // Clicking the view all will show the grid.
                 item.DOM.link.addEventListener('click', () => this.showContent(pos));
             }
 
-            // Closing the grid/content view.
+            // Closing the content view.
             this.DOM.backCtrl.addEventListener('click', () => this.hideContent());
         }
-        navigate(pos) {
-            if ( this.isAnimating || pos === this.current ) return;
+
+        showContent(pos) {
+            if ( this.isAnimating ) return;
             const direction = this.current < pos ? 'up' : 'down';
 			this.menuItems[this.current].toggleCurrent(direction);
 			this.contentItems[this.current].toggleCurrent();
             this.isAnimating = true;
-            // Disable the mousemove functionality.
-            allowTilt = false;
-            // Hide the current grid items.
-            this.grids[this.current].hideItems(direction);
             // Update current value.
             this.current = pos;
 			this.menuItems[this.current].toggleCurrent(direction);
 			this.contentItems[this.current].toggleCurrent();
-			// Show the next grid items.
-            this.grids[this.current].showItems(direction).then(() => {
-                this.isAnimating = false;
-                allowTilt = true;
-            });
-        }
-        showContent(pos) {
-            if ( this.isAnimating || this.grids[this.current].DOM.el.classList.contains('grid--open') ) return;
+            this.isAnimating = false;
+
+            if ( this.isAnimating  ) return;
 			this.isAnimating = true;
-			// Disable the mousemove functionality.
-            allowTilt = false;
             // Disable the menu.
             this.DOM.menu.classList.add('menu--closed');
-            // Show the grid.
-            this.grids[this.current].open().then(() => this.isAnimating = false);
+
+            this.isAnimating = false;
+
             // Hide the menu items.
             for (const item of this.menuItems) {
                 item.hide();
@@ -425,10 +246,20 @@
                 ease: Expo.easeInOut,
                 opacity: 1
             });
+            TweenMax.to(this.DOM.pageContents, 1, {
+                ease: Expo.easeInOut,
+                opacity: 1
+            });
         }
         hideContent() {
-            if ( this.isAnimating || !this.grids[this.current].DOM.el.classList.contains('grid--open') ) return;
+            if ( this.isAnimating ) return;
             this.isAnimating = true;
+
+            TweenMax.to(this.DOM.pageContents, 1, {
+                ease: Expo.easeInOut,
+                opacity: 0
+            });
+
             // Hide back ctrl.
             TweenMax.to(this.DOM.backCtrl, 1, {
                 ease: Expo.easeInOut,
@@ -436,16 +267,11 @@
             });
             
             scrollIt(0, 300, 'easeOutQuad', () => {
-                // Disabel scroll.
+                // Disable scroll.
                 this.DOM.page.classList.add('page--preview');
-                // Hide the grid.
-                this.grids[this.current].close().then(() => {
-                    // Enable the menu.
-                    this.DOM.menu.classList.remove('menu--closed');
-                    // Enable the mousemove functionality.
-                    allowTilt = true;
-                    this.isAnimating = false;
-                });
+                // Enable the menu.
+                this.DOM.menu.classList.remove('menu--closed');
+                this.isAnimating = false;
                 // Show the menu items.
                 for (const item of this.menuItems) {
                     item.show();
