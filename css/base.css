@@ -106,6 +106,7 @@ main {
 	left: 0;
 	width: 100%;
 	backdrop-filter: blur(6px);
+	-webkit-backdrop-filter: blur(6px);
 	overflow: hidden;
 }
 
