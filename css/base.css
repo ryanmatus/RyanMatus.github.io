@@ -219,6 +219,12 @@ main {
 	display: inline-block;
 }
 
+.menu__item-text:hover {
+	-webkit-text-fill-color: #fa80a4;
+	text-fill-color: #fa80a4;
+	color: #fa80a4;
+}
+
 .menu__item--current .menu__item-text {
 
 }
