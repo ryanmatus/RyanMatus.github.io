@@ -94,6 +94,7 @@ a:focus {
 main {
 	position: relative;
 	width: 100%;
+	overflow: hidden;
 }
 
 .frame {
@@ -108,7 +109,6 @@ main {
 
 .content {
 	text-align: center;
-	overflow: hidden;
 	opacity: 0;
 }
 
@@ -413,7 +413,6 @@ main {
 		height: 100vh;
 		padding: 2rem;
 		pointer-events: none;
-		overflow: hidden;
 		grid-template-columns: 50% 50%;
 		grid-template-rows: auto auto auto;
 		grid-template-areas: 'pageheader menutop';
@@ -423,12 +422,10 @@ main {
 	}
 	.frame a {
 		pointer-events: auto;
-		overflow: hidden;
 	}
 	.pageheader {
 		grid-area: pageheader;
 		margin: 0;
-		overflow: hidden;
 	}
 	.menutop {
 		grid-area: menutop;
@@ -439,7 +436,6 @@ main {
 		grid-auto-flow: column;
 		justify-content: end;
 		grid-gap: 1rem;
-		overflow: hidden;
 	}
 	.menutop__item:nth-child(2) {
 		margin: 0 2rem 0 0;
