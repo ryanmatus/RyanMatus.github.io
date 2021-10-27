@@ -417,15 +417,7 @@ main {
 		grid-template-columns: 50% 50%;
 		grid-template-rows: auto auto auto;
 		grid-template-areas: 'pageheader menutop'
-							'... ...'
-							'... cheader';
-	}
-	.c-header {
-		grid-area: cheader;
-		padding: 0;
-		justify-self: end;
-		text-align: right;
-		overflow: hidden;
+							'... ...';
 	}
 	.c-links {
 		margin: 0;
