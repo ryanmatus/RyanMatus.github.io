@@ -422,6 +422,7 @@ main {
 		grid-template-rows: auto auto auto;
 		grid-template-areas: 'pageheader menutop';
 		backdrop-filter: none;
+		-webkit-backdrop-filter: none;
 	}
 	.c-links {
 		margin: 0;
