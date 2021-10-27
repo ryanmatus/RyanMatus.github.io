@@ -138,6 +138,7 @@ main {
 .pageheader {
 	font-size: 1rem;
 	margin: 1rem 0;
+	overflow: hidden;
 }
 
 .menutop__item {
