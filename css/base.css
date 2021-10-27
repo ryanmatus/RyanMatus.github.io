@@ -105,11 +105,13 @@ main {
 	top: 0;
 	left: 0;
 	width: 100%;
+	overflow-x: hidden;
 }
 
 .content {
 	text-align: center;
 	opacity: 0;
+	overflow-x: hidden;
 }
 
 /* Header */
