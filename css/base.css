@@ -416,18 +416,19 @@ main {
 		overflow: hidden;
 		grid-template-columns: 50% 50%;
 		grid-template-rows: auto auto auto;
-		grid-template-areas: 'pageheader menutop'
-							'... ...';
+		grid-template-areas: 'pageheader menutop';
 	}
 	.c-links {
 		margin: 0;
 	}
 	.frame a {
 		pointer-events: auto;
+		overflow: hidden;
 	}
 	.pageheader {
 		grid-area: pageheader;
 		margin: 0;
+		overflow: hidden;
 	}
 	.menutop {
 		grid-area: menutop;
@@ -438,6 +439,7 @@ main {
 		grid-auto-flow: column;
 		justify-content: end;
 		grid-gap: 1rem;
+		overflow: hidden;
 	}
 	.menutop__item:nth-child(2) {
 		margin: 0 2rem 0 0;
